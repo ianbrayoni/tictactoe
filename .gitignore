@@ -1,0 +1,10 @@
+# pipenv files
+Pipfile
+Pipfile.lock
+
+# Compiled Python modules
+*.pyo
+*.pyc
+
+#vscode ide
+.vscode
