@@ -52,7 +52,9 @@ class TestTicTacToeUtils(TestCase):
         assert response in self.edge_positions
 
     def test_play(self):
-        self.assertEqual(play(self.board), "oxxo  o x")
+        response = play(self.board)
+        self.assertEqual(response, "oxxo  o x")
+        self.assertEqual(len(response), 9)
 
     def test_is_safe_to_play(self):
         # valid board string
