@@ -2,7 +2,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from tic_tac_toe import (
-    str_to_lst,
+    create_board,
     select_any,
     winning_move,
     move_handler,
@@ -25,7 +25,7 @@ class TestTicTacToeUtils(TestCase):
         pass
 
     def test_str_to_list(self):
-        self.assertEqual(self.board, str_to_lst(self.str_board))
+        self.assertEqual(self.board, create_board(self.str_board))
 
     def test_winning_move(self):
         board = [" ", "o", "x", "x", "o", " ", " ", "o", " ", "x"]

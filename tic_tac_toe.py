@@ -1,13 +1,13 @@
 import random
 
 
-def str_to_lst(str_board):
+def create_board(str_board):
     """
     Convert string representation of the tictactoe board into a list
     List will have one extra item at the beginning so that board/grid
     positions can be referenced from 1 - refer to move_handler()
 
-    >> str_to_lst(" xxo  o x")
+    >> create_board(" xxo  o x")
     [' ', ' ', 'x', 'x', 'o', ' ', ' ', 'o', ' ', 'x']
 
     :param str_board: str (string representation of the tictactoe board)
@@ -181,7 +181,7 @@ def is_safe_to_play(str_board):
     if len(str_board) != 9:
         return False
 
-    board = str_to_lst(str_board)
+    board = create_board(str_board)
 
     if winning_move(board, "x") or winning_move(board, "o"):
         return False
@@ -197,7 +197,7 @@ def main():
     board_state = input("Enter the board state: ")
 
     if is_safe_to_play(board_state):
-        board = str_to_lst(board_state)
+        board = create_board(board_state)
         return play(board)
     else:
         return "Invalid board state!"
