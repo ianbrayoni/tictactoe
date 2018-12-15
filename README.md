@@ -18,7 +18,7 @@ pipenv --three
 ```
 - Install requirements
 ```
-pipenv install flask-restplus
+pipenv install flask-restful
 ```
 - Run app
 ```
