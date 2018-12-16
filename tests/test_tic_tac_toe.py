@@ -67,3 +67,6 @@ class TestTicTacToeUtils(TestCase):
         self.assertFalse(is_safe_to_play(self.str_board[:4]))
         # board is full
         self.assertFalse(is_safe_to_play("oxoxooxox"))
+        # a player can only be one move ahead
+        self.assertFalse(is_safe_to_play("oxxox  x "))
+        self.assertFalse(is_safe_to_play("xooxo  o "))

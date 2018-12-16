@@ -168,6 +168,7 @@ def is_safe_to_play(str_board):
         2. Board should not be full
         3. Can only play if x's > o's
         4. Expected characters are: ' ' or 'x' or 'o'
+        5. players take turns to play, one can only be one move ahead
 
     >> is_safe_to_play(" xxo  o x")
     True
@@ -184,6 +185,13 @@ def is_safe_to_play(str_board):
     board = create_board(str_board)
 
     if winning_move(board, "x") or winning_move(board, "o"):
+        return False
+
+    # players take turns to play, one can only be one move ahead
+    x_count = (board[1:]).count("x")
+    o_count = (board[1:]).count("o")
+
+    if (x_count - o_count > 1) or (o_count - x_count > 1):
         return False
 
     # board has extra element at beginning, check if board is full
