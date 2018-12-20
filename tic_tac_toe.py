@@ -17,24 +17,29 @@ def create_board(str_board):
     return board
 
 
-def winning_move(board, letter):
+def winning_move(board):
     """
     All possible winning moves
 
     :param board: list representation of the tictactoe game
-    :param letter: str
     :returns: True or False
     """
-    return (
-        (board[1] == letter and board[2] == letter and board[3] == letter)
-        or (board[4] == letter and board[5] == letter and board[6] == letter)
-        or (board[7] == letter and board[8] == letter and board[9] == letter)
-        or (board[1] == letter and board[4] == letter and board[7] == letter)
-        or (board[2] == letter and board[5] == letter and board[8] == letter)
-        or (board[3] == letter and board[6] == letter and board[9] == letter)
-        or (board[3] == letter and board[5] == letter and board[7] == letter)
-        or (board[1] == letter and board[5] == letter and board[9] == letter)
+    winning_positions = (
+        (1, 2, 3),
+        (4, 5, 6),
+        (7, 8, 9),
+        (1, 4, 7),
+        (2, 5, 8),
+        (3, 6, 9),
+        (3, 5, 7),
+        (1, 5, 9)
     )
+
+    for row in winning_positions:
+        if board[row[0]] == board[row[1]] == board[row[2]] != " ":
+            return True
+
+    return False
 
 
 def move_handler(board):
@@ -184,7 +189,7 @@ def is_safe_to_play(str_board):
 
     board = create_board(str_board)
 
-    if winning_move(board, "x") or winning_move(board, "o"):
+    if winning_move(board):
         return False
 
     x_count = (board[1:]).count("x")

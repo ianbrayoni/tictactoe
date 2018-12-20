@@ -24,13 +24,12 @@ class TestTicTacToeUtils(TestCase):
     def tearDown(self):
         pass
 
-    def test_str_to_list(self):
+    def test_create_board(self):
         self.assertEqual(self.board, create_board(self.str_board))
 
     def test_winning_move(self):
         board = [" ", "o", "x", "x", "o", " ", " ", "o", " ", "x"]
-        self.assertTrue(winning_move(board, "o"))
-        self.assertFalse(winning_move(board, "x"))
+        self.assertTrue(winning_move(board))
 
     @patch("tic_tac_toe.random.randrange", return_value=0)
     def test_select_any(self, mock):
