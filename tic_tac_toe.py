@@ -13,7 +13,7 @@ def create_board(str_board):
     :param str_board: str (string representation of the tictactoe board)
     :returns: list
     """
-    board = [' '] + list(str_board)
+    board = [" "] + list(str_board)
     return board
 
 
@@ -164,11 +164,11 @@ def is_safe_to_play(str_board):
     """
     A couple of checks ascertaining whether its safe to play
     Checks are done against the string representation of the tictactoe board
-        1. String has to be of nine characters, no more no less
-        2. Board should not be full
-        3. Can only play if x's > o's
-        4. Expected characters are: ' ' or 'x' or 'o'
-        5. players take turns to play, one can only be one move ahead
+        1. Expected characters are: ' ' or 'x' or 'o'
+        2. String has to be of nine characters, no more no less
+        3. If there's already a winner, no point to play
+        4. Players take turns to play, one can only be one move ahead
+        5. Board should not be full
 
     >> is_safe_to_play(" xxo  o x")
     True
@@ -176,7 +176,7 @@ def is_safe_to_play(str_board):
     :param str_board: str - string representation of the tictactoe board
     :returns: Boolean - True if safe to play, otherwise False
     """
-    if not set(str_board).issubset({'x', 'o', ' '}):
+    if not set(str_board).issubset({"x", "o", " "}):
         return False
 
     if len(str_board) != 9:
@@ -187,14 +187,12 @@ def is_safe_to_play(str_board):
     if winning_move(board, "x") or winning_move(board, "o"):
         return False
 
-    # players take turns to play, one can only be one move ahead
     x_count = (board[1:]).count("x")
     o_count = (board[1:]).count("o")
 
     if (x_count - o_count > 1) or (o_count - x_count > 1):
         return False
 
-    # board has extra element at beginning, check if board is full
     if (board[1:]).count(" ") == 0:
         return False
 
