@@ -11,6 +11,7 @@ from tic_tac_toe import (
     play_edges,
     play,
     is_safe_to_play,
+    NUM_BOARD_POSITIONS
 )
 
 
@@ -53,7 +54,7 @@ class TestTicTacToeUtils(TestCase):
     def test_play(self):
         response = play(self.board)
         self.assertEqual(response, "oxxo  o x")
-        self.assertEqual(len(response), 9)
+        self.assertEqual(len(response), NUM_BOARD_POSITIONS)
 
     def test_is_safe_to_play(self):
         # valid board string

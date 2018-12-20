@@ -1,5 +1,10 @@
 import random
 
+X = "x"
+O = "o"
+EMPTY = " "
+NUM_BOARD_POSITIONS = 9
+
 
 def create_board(str_board):
     """
@@ -36,7 +41,7 @@ def winning_move(board):
     )
 
     for row in winning_positions:
-        if board[row[0]] == board[row[1]] == board[row[2]] != " ":
+        if board[row[0]] == board[row[1]] == board[row[2]] != EMPTY:
             return True
 
     return False
@@ -57,7 +62,7 @@ def move_handler(board):
     :returns: int - the index to make a move to
     """
     available_moves = [
-        idx for idx, letter in enumerate(board) if letter == " " and idx != 0
+        idx for idx, letter in enumerate(board) if letter == EMPTY and idx != 0
     ]
 
     # if board elements read from 0, this condition fails - if 0: False
@@ -159,7 +164,7 @@ def play(board):
     pos = move_handler(board)
 
     if pos:
-        board[pos] = "o"
+        board[pos] = O
 
     # return string of 9 elements, rem our array has 10 elements
     return "".join(board[1:])
@@ -181,10 +186,10 @@ def is_safe_to_play(str_board):
     :param str_board: str - string representation of the tictactoe board
     :returns: Boolean - True if safe to play, otherwise False
     """
-    if not set(str_board).issubset({"x", "o", " "}):
+    if not set(str_board).issubset({X, O, EMPTY}):
         return False
 
-    if len(str_board) != 9:
+    if len(str_board) != NUM_BOARD_POSITIONS:
         return False
 
     board = create_board(str_board)
@@ -192,13 +197,13 @@ def is_safe_to_play(str_board):
     if winning_move(board):
         return False
 
-    x_count = (board[1:]).count("x")
-    o_count = (board[1:]).count("o")
+    x_count = (board[1:]).count(X)
+    o_count = (board[1:]).count(O)
 
     if (x_count - o_count > 1) or (o_count - x_count > 1):
         return False
 
-    if (board[1:]).count(" ") == 0:
+    if (board[1:]).count(EMPTY) == 0:
         return False
 
     return True
