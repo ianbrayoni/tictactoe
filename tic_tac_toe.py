@@ -176,7 +176,7 @@ def is_safe_to_play(str_board):
     :param str_board: str - string representation of the tictactoe board
     :returns: Boolean - True if safe to play, otherwise False
     """
-    if set(str_board) not in [{'x', 'o', ' '}, {' '}, {'x', 'o'}, {'x'}]:
+    if not set(str_board).issubset({'x', 'o', ' '}):
         return False
 
     if len(str_board) != 9:
