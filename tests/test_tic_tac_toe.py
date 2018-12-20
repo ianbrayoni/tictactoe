@@ -4,6 +4,8 @@ from unittest.mock import patch
 from tic_tac_toe import (
     create_board,
     select_any,
+    win,
+    block_x_win,
     winning_move,
     move_handler,
     play_corners,
@@ -11,14 +13,14 @@ from tic_tac_toe import (
     play_edges,
     play,
     is_safe_to_play,
-    NUM_BOARD_POSITIONS
+    NUM_BOARD_POSITIONS,
 )
 
 
 class TestTicTacToeUtils(TestCase):
     def setUp(self):
-        self.str_board = " xxo  o x"
-        self.board = [" ", " ", "x", "x", "o", " ", " ", "o", " ", "x"]
+        self.str_board = " xxo  o  "
+        self.board = [" ", " ", "x", "x", "o", " ", " ", "o", " ", " "]
         self.corners_positions = [1, 3, 7, 9]
         self.edge_positions = [2, 4, 6, 8]
 
@@ -31,6 +33,14 @@ class TestTicTacToeUtils(TestCase):
     def test_winning_move(self):
         board = [" ", "o", "x", "x", "o", " ", " ", "o", " ", "x"]
         self.assertTrue(winning_move(board))
+
+    def test_win(self):
+        board = [" ", " ", "x", "x", "o", " ", " ", "o", " ", "x"]
+        self.assertEqual(win(board), 1)
+
+    def test_block_x_win(self):
+        board = [" ", " ", "x", "x", " ", " ", " ", "o", " ", "x"]
+        self.assertEqual(block_x_win(board), 1)
 
     @patch("tic_tac_toe.random.randrange", return_value=0)
     def test_select_any(self, mock):
@@ -53,7 +63,7 @@ class TestTicTacToeUtils(TestCase):
 
     def test_play(self):
         response = play(self.board)
-        self.assertEqual(response, "oxxo  o x")
+        self.assertEqual(response, "oxxo  o  ")
         self.assertEqual(len(response), NUM_BOARD_POSITIONS)
 
     def test_is_safe_to_play(self):

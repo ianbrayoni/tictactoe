@@ -11,9 +11,9 @@ class TicTacToeApiTestCase(TestCase):
         api.app.config["TESTING"] = False
 
     def test_valid_request(self):
-        response = self.api.get("/tictactoe?board=+xxo++o+x")
+        response = self.api.get("/tictactoe?board=+xxo++o++")
         self.assertEqual(response.status, "200 OK")
-        assert b"oxxo  o x" in response.data
+        assert b"oxxo  o  " in response.data
 
     def test_invalid_request(self):
         response = self.api.get("/tictactoe?board=askdhf")

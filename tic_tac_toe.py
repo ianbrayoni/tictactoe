@@ -4,6 +4,16 @@ X = "x"
 O = "o"
 EMPTY = " "
 NUM_BOARD_POSITIONS = 9
+WINNING_POSITIONS = (
+    (1, 2, 3),
+    (4, 5, 6),
+    (7, 8, 9),
+    (1, 4, 7),
+    (2, 5, 8),
+    (3, 6, 9),
+    (3, 5, 7),
+    (1, 5, 9),
+)
 
 
 def create_board(str_board):
@@ -24,23 +34,12 @@ def create_board(str_board):
 
 def winning_move(board):
     """
-    All possible winning moves
+    Check for possible winning moves
 
     :param board: list representation of the tictactoe game
     :returns: True or False
     """
-    winning_positions = (
-        (1, 2, 3),
-        (4, 5, 6),
-        (7, 8, 9),
-        (1, 4, 7),
-        (2, 5, 8),
-        (3, 6, 9),
-        (3, 5, 7),
-        (1, 5, 9)
-    )
-
-    for row in winning_positions:
+    for row in WINNING_POSITIONS:
         if board[row[0]] == board[row[1]] == board[row[2]] != EMPTY:
             return True
 
@@ -61,20 +60,68 @@ def move_handler(board):
     :param board: list representaion of the tictactoe board
     :returns: int - the index to make a move to
     """
-    available_moves = [
-        idx for idx, letter in enumerate(board) if letter == EMPTY and idx != 0
-    ]
+    if win(board):
+        return win(board)
+    elif block_x_win(board):
+        return block_x_win(board)
+    else:
+        available_moves = [
+            idx for idx, letter in enumerate(board) if letter == EMPTY and idx != 0
+        ]
 
-    # if board elements read from 0, this condition fails - if 0: False
-    # yet 0 is a valid position in a 0-indexed list
-    if play_corners(available_moves):
-        return play_corners(available_moves)
+        # if board elements read from 0, this condition fails - if 0: False
+        # yet 0 is a valid position in a 0-indexed list
+        if play_corners(available_moves):
+            return play_corners(available_moves)
 
-    if play_center(available_moves):
-        return play_center(available_moves)
+        if play_center(available_moves):
+            return play_center(available_moves)
 
-    if play_edges(available_moves):
-        return play_edges(available_moves)
+        if play_edges(available_moves):
+            return play_edges(available_moves)
+
+
+def win(board):
+    """
+    Make a winning move for O if its obvious to do so
+
+    :param board: list representaion of the tictactoe board
+    :returns: int - the index to make a move to
+    """
+    return check_for_possible_win(board, O)
+
+
+def block_x_win(board):
+    """
+    Block X's move if no winning move available for O
+
+    :param board: list representaion of the tictactoe board
+    :returns: int - the index to make a move to
+    """
+    return check_for_possible_win(board, X)
+
+
+def check_for_possible_win(board, letter):
+    """
+    Given a letter, check whether it occurs one after the other e.g
+    ['x', 'x', ' ']
+
+    :param board: list representaion of the tictactoe board
+    :param letter: str to check for
+    :returns: int - the index to make a move to
+    """
+    for row in WINNING_POSITIONS:
+        if letter == board[row[0]] == board[row[1]]:
+            move = row[2]
+            break
+        elif letter == board[row[0]] == board[row[2]]:
+            move = row[1]
+            break
+        elif letter == board[row[1]] == board[row[2]]:
+            move = row[0]
+            break
+
+    return move
 
 
 def play_corners(possible_moves):
