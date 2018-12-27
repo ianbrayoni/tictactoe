@@ -1,7 +1,9 @@
 ## Synopsis
 
-An unintelligent implementation of the [tictactoe game](http://www.exploratorium.edu/brain_explorer/tictactoe.html) using a simple strategy that hopes to make this app, which is always playing as `o`, a formidable opponent.
+An implementation of the [tictactoe game](http://www.exploratorium.edu/brain_explorer/tictactoe.html) using a simple strategy that hopes to make this app, which is always playing as `o`, a formidable opponent.
 The strategy is as follows:
+- Watch out for obvious wins if any
+- Block attempts by `x` to win
 - If corner positions are available, play any one of them.
 - If no corner positions are available but the center is open, play center.
 - Only play the edges if and only if, no corners and center are available.
