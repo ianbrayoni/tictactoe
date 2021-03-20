@@ -1,27 +1,17 @@
-################################################################################
-# This requirements file has been automatically generated from `Pipfile` with
-# `pipenv-to-requirements`
-#
-#
-# This has been done to maintain backward compatibility with tools and services
-# that do not support `Pipfile` yet.
-#
-# Do NOT edit it directly, use `pipenv install [-d]` to modify `Pipfile` and
-# `Pipfile.lock` and then regenerate `requirements*.txt`.
-################################################################################
-
-aniso8601==8.0.0
-attrs==19.3.0
-click==7.0
+-i https://pypi.org/simple/
+aniso8601==9.0.1
+attrs==20.3.0
+click==7.1.2
 flask-restplus==0.13.0
-flask==1.1.1
-importlib-metadata==1.4.0 ; python_version < '3.8'
+flask==1.1.2
+importlib-metadata==3.7.3 ; python_version < '3.8'
 itsdangerous==1.1.0
-jinja2==2.11.0
+jinja2==2.11.3
 jsonschema==3.2.0
 markupsafe==1.1.1
-pyrsistent==0.15.7
-pytz==2019.3
-six==1.14.0
-werkzeug==0.16.1
-zipp==2.1.0
+pyrsistent==0.17.3
+pytz==2021.1
+six==1.15.0
+typing-extensions==3.7.4.3 ; python_version < '3.8'
+werkzeug==1.0.1
+zipp==3.4.1
